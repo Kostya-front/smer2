@@ -132,6 +132,13 @@ onMounted(() => {
 h2{
   text-align: center;
 }
+
+@media screen and (max-width: 700px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
 .pagination {
   display: flex;
   justify-content: center;
