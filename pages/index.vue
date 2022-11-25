@@ -80,6 +80,7 @@ const textareaStore = useTextArea()
 const storeAnswer = useAnswers()
 
 useHead({
+  title: "СМЭР",
   link:[
     {
       rel:"stylesheet",
