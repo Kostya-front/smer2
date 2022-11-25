@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <header class="header">
-      <div @click="isShownLinks = !isShownLinks" class="header-link">СМЕР
+      <div @click="isShownLinks = !isShownLinks" class="header-link">СМЭР
       <ul v-if="isShownLinks">
         <li value="1"><a href="https://eqspb.ru/o-kompanii/articles/irracionalnaya-ustanovka/" target="_blank">Иррациональные установки</a></li>
         <li value="2"><a href="https://www.b17.ru/article/71191/" target="_blank">Глубиинные убеждения</a></li>
