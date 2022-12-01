@@ -6,13 +6,13 @@
         <span>{{ input.title }}</span>
       </label>
     </p>
-
+    <p>{{ input.value }}</p>
     <input
         v-model="input.value"
         @blur="setValue"
         :id="input.title"
         :disabled="!input.isChecked"
-        type="text"
+        type="range"
         class="validate"
     >
   </div>

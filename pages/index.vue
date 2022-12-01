@@ -9,36 +9,25 @@
       </ul>
       </div>
     </header>
-    <button @click="prev" :disabled="index <= 1" class="button-swipe"> &lt </button>
-    <div
-        v-if="index === 1" class="d-flex">
+    <div class="d-flex">
       <div class="container row">
         <h2 class="col s12">Оцените состояния по 100-балльной шкале</h2>
         <Input
-            v-for="input of store.paginatedInputs"
+            v-for="input of store.inputs"
             :key="input.title"
             :input="input"
         />
       </div>
-      <div class="pagination col lx12">
-        <button
-            class="primary"
-            v-for="(item, i) in Math.ceil(store.inputs.length/12)"
-            @click="paginated(i)">{{ i + 1 }}
-        </button>
-      </div>
     </div>
 
-    <div
-        v-else-if="index === 2"
-        class="container row">
-      <TextArea :textarea="textareaStore.textarea[0]" class="input-field col s12"/>
+    <div class="container row">
+      <TextArea :textarea="textareaStore.textarea[0]" classItem="input-field col s12"/>
 
-      <TextArea :textarea="textareaStore.textarea[1]" class="input-field col l4 s12 "/>
-      <TextArea :textarea="textareaStore.textarea[2]" class="input-field col l4 s12"/>
-      <TextArea :textarea="textareaStore.textarea[3]" class="input-field col l4 s12"/>
+      <TextArea :textarea="textareaStore.textarea[1]" classItem="input-field col l4 s12 "/>
+      <TextArea :textarea="textareaStore.textarea[2]" classItem="input-field col l4 s12"/>
+      <TextArea :textarea="textareaStore.textarea[3]" classItem="input-field col l4 s12"/>
 
-      <TextArea :textarea="textareaStore.textarea[4]" class="input-field col s12"/>
+      <TextArea :textarea="textareaStore.textarea[4]" classItem ="input-field col s12"/>
 
       <h2>Вопросы об автоматических мыслях</h2>
 
@@ -47,13 +36,10 @@
       </client-only>
     </div>
 
-    <div
-        v-else-if="index === 3"
-        class="container row">
+    <div class="container row">
       <Answer v-for="answer of storeAnswer.answers" :key="answer.id" :answer="answer"/>
     </div>
 
-    <button @click="next"  class="button-swipe" :disabled="index > 2"> > </button>
     <footer class="footer">
       <span>Материал подготовили</span>
       <span>Психолог Иван Лысенко</span>
@@ -121,13 +107,8 @@ onMounted(() => {
 
 <style scoped>
 .main-container {
-  display: grid;
-  grid-template-columns: 1fr 10fr 1fr;
-  grid-template-rows: 80px auto 80px;
-  min-height: 100vh;
-}
-.button-swipe{
-  font-size: 12vmax;
+  display: flex;
+  flex-direction: column;
 }
 
 h2{
@@ -140,22 +121,12 @@ h2{
   }
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-}
-.pagination button:focus {
-  background: #9d0b9d;
-}
-
 .d-flex {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .header {
-  grid-row: 1/2;
-  grid-column: 1/4;
   background: #9d0b9d;
   box-shadow: 1px 5px 20px #9d0b9d;
   color: #fff;
@@ -167,17 +138,19 @@ h2{
 
 .footer {
   background: #D9D9D9;
-  grid-column: 1/4;
   width: 100%;
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 0 20px;
+  padding: 20px 20px;
+  height: 135px;
 }
 
 .header-link {
   position: relative;
   width: 100%;
+  cursor: pointer;
+  text-decoration: underline;
 }
 ul {
   position: absolute;
@@ -186,15 +159,5 @@ ul {
   box-shadow: 1px 1px 13px #000;
   background: #fff;
   z-index: 2;
-}
-@media screen and (max-width: 700px) {
-  .main-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header {
-    grid-column: 1/2;
-  }
 }
 </style>
