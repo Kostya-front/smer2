@@ -5,7 +5,6 @@
     <div  v-for="(field, i) of answer.fields" :key="field.id" class="answer">
       <textarea
           v-model="field.value"
-          @blur="storeAnswers.setAnswers"
           :placeholder="field.placeholder"
       />
 

@@ -1,11 +1,9 @@
 // @ts-ignore
 import { defineStore } from 'pinia'
+import {ref, watch} from "vue";
 
-export const useInputs = defineStore({
-    id: 'inputs',
-    state: () => ({
-        indexPag: 0,
-        inputs: [
+export const useInputs = defineStore('inputs', () => {
+        const inputs = ref ([
             {id:1, title: 'Тревожность', isChecked: false, value: 0},
             {id:2, title: 'Апатия', isChecked: false, value: 0},
             {id:3, title: 'Страх', isChecked: false, value: 0},
@@ -161,45 +159,31 @@ export const useInputs = defineStore({
             {id:1, title: 'Жизнелюбие', isChecked: false, value: 0},
             {id:2, title: 'Вдохновенние', isChecked: false, value: 0},
             {id:3, title: 'Воодушевление', isChecked: false, value: 0},
-        ]
-    }),
+        ])
 
-    actions: {
-        setValue(input: { title: string, value: number}) {
-            this.inputs.forEach(inputItem => {
-                if(inputItem.title === input.title) {
-                    if( +input.value > 100) {
-                        inputItem.value = 100
-                    }
-                    else if( +input.value <= 1) {
-                        inputItem.value = 1
-                    }
-                    inputItem.value = input.value
-                }
-            })
-            localStorage.setItem('inputs', JSON.stringify(this.inputs))
-        },
-
-        setState() {
-            if(localStorage.getItem('inputs')) {
-                this.inputs = JSON.parse(localStorage.getItem('inputs')!)
-            }
-        },
-        setCheck(input: {title: string, isChecked: boolean}) {
-            this.inputs.forEach(inputItem => {
-                if(inputItem.title === input.title) {
-                    inputItem.isChecked = input.isChecked
-                }
-            })
-            localStorage.setItem('inputs', JSON.stringify(this.inputs))
-        },
-
-        paginated(skip: number) {
-            this.indexPag = skip
+    function setState() {
+        if(localStorage.getItem('inputs')) {
+            inputs.value = JSON.parse(localStorage.getItem('inputs')!)
         }
-    },
+    }
 
-    getters: {
-        paginatedInputs: (state) => state.inputs.slice(12*state.indexPag,12*state.indexPag + 12)
+    function setCheck(input: {title: string, isChecked: boolean}) {
+        inputs.value.forEach(inputItem => {
+            if(inputItem.title === input.title) {
+                inputItem.isChecked = input.isChecked
+            }
+        })
+    }
+
+    watch(inputs, async(newValue, oldValue) => {
+        if(newValue) {
+            localStorage.setItem('inputs', JSON.stringify(inputs.value))
+        }
+    }, { deep: true })
+
+    return {
+        setCheck,
+        inputs,
+        setState
     }
 })

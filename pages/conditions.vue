@@ -149,7 +149,7 @@ ul {
   z-index: 2;
 }
 
-.items { display: flex; align-items: center; justify-content: space-between; width: 100%}
+.items { display: flex; align-items: center; justify-content: space-between; width: 100%;  border-bottom: 1px dashed;}
 
 @media screen and (max-width: 700px) {
   h5 { font-size: 0.8rem}

@@ -2,7 +2,7 @@
   <div class="question">
     <p class="col xl6 s12">{{ question.question }}</p>
     <div class="input-field col xl6 s12">
-      <input v-model="question.value" id="last_name" @blur="store.setQuestions()" type="text" class="validate">
+      <input v-model="question.value" id="last_name"  type="text" class="validate">
     </div>
   </div>
 </template>
